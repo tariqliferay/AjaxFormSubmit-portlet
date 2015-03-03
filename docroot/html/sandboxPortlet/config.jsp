@@ -77,37 +77,23 @@ page import="java.net.URLEncoder" %>
 
 <portlet:actionURL name="addStatusEntry" var="addStatusEntryURL" />
 
-<portlet:resourceURL var="addStatusEntryResourceURL">
-  <portlet:param name="<%=Constants.CMD%>" value="addStatusEntry" />
-</portlet:resourceURL>
-
-<aui:form method="POST" action="javascript:void();" name="actionUrl" id="actionUrl">
+<aui:form method="POST" action="javascript:void();" name="updateStatus" id="updateStatus">
 			
 		<aui:input type="textarea" name="content" placeholder="What are you working on?" cssClass="status-content"></aui:input>
-		<aui:input name="test"/>
+						
 		<div class="clearfix">
-			<a class="btn btn-primary pull-right" onClick="updateStatusFormActionUrl();" id='<portlet:namespace/>stausSubmit'>Post</a>
-		</div>
-		
-</aui:form>
-
-<aui:form method="POST" action="javascript:void();" name="resourceURl" id="resourceURl">
-			
-		<aui:input type="textarea" name="content" placeholder="What are you working on?" cssClass="status-content"></aui:input>
-		<aui:input name="test"/>
-		<div class="clearfix">
-			<a class="btn btn-primary pull-right" onClick="updateStatusFormResourceURL();" id='<portlet:namespace/>stausSubmit'>Post</a>
+			<a class="btn btn-primary pull-right" onClick="updateStatusForm();" id='<portlet:namespace/>stausSubmit'>Post</a>
 		</div>
 		
 </aui:form>
 
 <aui:script use="aui-io-request,aui-node">
-    Liferay.provide(window,'updateStatusFormActionUrl',
+    Liferay.provide(window,'updateStatusForm',
          function() {
           var A = AUI();
           A.io.request('<%=addStatusEntryURL%>',{
               method: 'POST',
-              form: { id: '<portlet:namespace/>actionUrl' },
+              form: { id: '<portlet:namespace/>updateStatus' },
               on: {
                   success: function(){
                 	  ///Here code after sucess
@@ -115,19 +101,5 @@ page import="java.net.URLEncoder" %>
              }
         });
   });
-    
-    Liferay.provide(window,'updateStatusFormResourceURL',
-            function() {
-             var A = AUI();
-             A.io.request('<%=addStatusEntryResourceURL%>',{
-                 method: 'POST',
-                 form: { id: '<portlet:namespace/>resourceURl' },
-                 on: {
-                     success: function(){
-                   	  ///Here code after sucess
-                      }
-                }
-           });
-     });
   
   </aui:script>
